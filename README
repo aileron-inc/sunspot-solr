@@ -13,10 +13,12 @@ Creates config for test, development, staging, and production environments.
 
 ## Memo
 
-docker run -p 8983:8983 --name sunspot aileron/sunspot-solr
 docker build -t aileron/sunspot-solr .
+docker run --env "SOLR_HOME=/var/sunspot" -p 8983:8983 --rm --name sunspot aileron/sunspot-solr
 docker exec -it sunspot bash
 
 docker stop $(docker ps -q)
 docker rm $(docker ps -q -a)
 docker rmi $(docker images -q)
+
+curl 'http://localhost:8983/solr/admin/cores?action=CREATE&name=test&instanceDir=test&config=solrconfig.xml&schema=schema.xml'
