@@ -11,12 +11,7 @@ using 6 because that's what I need)
 
 Creates config for test, development, staging, and production environments.
 
-## How to use
+## Memo
 
-after building, and getting this up and running, you need to create the cores. This can
-only be done while solr is running and thus not in the Dockerfile itself. Luckily this
-is easily accomplished with a GET request. Eg, using curl:
-
-    ENV=test \
-    curl "http://localhost:8983/solr/admin/cores?action=CREATE&name=$ENV&instanceDir=$ENV"
-
+docker run -p 8983:8983 --name sunspot aileron/sunspot-solr
+docker build -t aileron/sunspot-solr .
